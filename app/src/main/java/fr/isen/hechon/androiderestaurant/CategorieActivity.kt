@@ -75,9 +75,9 @@ class CategorieActivity : AppCompatActivity() {
 
     fun fillRecyclerView(dataApi:ApiData){
         //TODO faire selon le parametre donné en entrées
-        if(intent.getStringExtra("Category")=="Entrées"){
-            dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
-        }
+
+        dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
+
         if(intent.getStringExtra("Category")=="Plats"){
             dataApi.data[1].items.forEach { item: Item -> itemsList.add(item) }
         }
