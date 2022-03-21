@@ -9,6 +9,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
+import fr.isen.hechon.androiderestaurant.databinding.ActivityCategorieBinding
+import fr.isen.hechon.androiderestaurant.databinding.ActivityHomeBinding
 import fr.isen.hechon.androiderestaurant.domain.ApiData
 import fr.isen.hechon.androiderestaurant.domain.Item
 import org.json.JSONObject
@@ -19,19 +21,26 @@ class CategorieActivity : AppCompatActivity() {
 
     private val itemsList = ArrayList<Item>()
     private lateinit var customAdapter: CustomAdapter
-
+    private lateinit var binding : ActivityCategorieBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_categorie)
+        binding = ActivityCategorieBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
+
+        //titre
         val categoryName = intent.getStringExtra("Category")
+        setTitle(categoryName)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        //setup du recycler view
+        val recyclerView: RecyclerView = binding.recyclerView
         customAdapter = CustomAdapter(itemsList)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = customAdapter
 
+        //fetch from api
         getDataFromApi()
     }
 
@@ -49,6 +58,7 @@ class CategorieActivity : AppCompatActivity() {
                     // response
                     val strResp = response.toString()
                     val apiData=Gson().fromJson(strResp, ApiData::class.java)
+                    apiData.data[0]
                     Log.d("API", strResp)
                     fillRecyclerView(apiData)
                 },
@@ -65,8 +75,15 @@ class CategorieActivity : AppCompatActivity() {
 
     fun fillRecyclerView(dataApi:ApiData){
         //TODO faire selon le parametre donné en entrées
-        Log.d("APIObject", dataApi.data[0].items[0].name_fr)
-        dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
+        if(intent.getStringExtra("Category")=="Entrées"){
+            dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
+        }
+        if(intent.getStringExtra("Category")=="Plats"){
+            dataApi.data[1].items.forEach { item: Item -> itemsList.add(item) }
+        }
+        if(intent.getStringExtra("Category")=="Desserts"){
+            dataApi.data[2].items.forEach { item: Item -> itemsList.add(item) }
+        }
         customAdapter.notifyDataSetChanged()
     }
 

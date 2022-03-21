@@ -6,34 +6,33 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import fr.isen.hechon.androiderestaurant.databinding.ActivityHomeBinding
 
-class MainActivity : AppCompatActivity() {
+class ActivityHome : AppCompatActivity() {
+    private lateinit var binding : ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-
-
-
-        val btn_entry = findViewById(R.id.button_entry) as Button
-        btn_entry.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Entrées", Toast.LENGTH_SHORT).show()
+        binding.buttonEntry.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "Entrées", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CategorieActivity::class.java)
             intent.putExtra("Category","Entrees")
             startActivity(intent)
         }
 
-        val btn_main = findViewById(R.id.button_main) as Button
-        btn_main.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Plats", Toast.LENGTH_SHORT).show()
+
+        binding.buttonMain.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "Plats", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CategorieActivity::class.java)
             intent.putExtra("Category","Plats")
             startActivity(intent)
         }
 
-        val btn_dessert = findViewById(R.id.button_dessert) as Button
-        btn_dessert.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Desserts", Toast.LENGTH_SHORT).show()
+        binding.buttonDessert.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "Desserts", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CategorieActivity::class.java)
             intent.putExtra("Category","Desserts")
             startActivity(intent)
