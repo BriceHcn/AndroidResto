@@ -5,5 +5,11 @@
     <string name="main_name">Plats</string>
     <string name="dessert_name">Desserts</string>
     <string name="category_default">Category</string>
+    <string name="logo_desc">Logo Uncle Sam</string>
+    <string name="dish_name">Titre Produit</string>
+    <string name="dish_price">Titre Prix</string>
+    <string name="fake_title">Saumon</string>
+    <string name="fake_price">10 €</string>
+    dish_name
 
 </resources>

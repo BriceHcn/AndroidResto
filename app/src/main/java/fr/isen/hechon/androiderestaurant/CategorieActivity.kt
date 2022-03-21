@@ -75,14 +75,13 @@ class CategorieActivity : AppCompatActivity() {
 
     fun fillRecyclerView(dataApi:ApiData){
         //TODO faire selon le parametre donné en entrées
-
-        dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
-
         if(intent.getStringExtra("Category")=="Plats"){
             dataApi.data[1].items.forEach { item: Item -> itemsList.add(item) }
         }
-        if(intent.getStringExtra("Category")=="Desserts"){
+        else if(intent.getStringExtra("Category")=="Desserts"){
             dataApi.data[2].items.forEach { item: Item -> itemsList.add(item) }
+        }else{
+            dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
         }
         customAdapter.notifyDataSetChanged()
     }
