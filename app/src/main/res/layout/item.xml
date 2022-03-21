@@ -11,38 +11,47 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:text="nom : "
+        android:text="@string/dish_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ing"
+        android:id="@+id/prix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:text="ingredients : "
+        android:text="@string/dish_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom" />
 
     <TextView
-        android:id="@+id/nom_var"
+        android:id="@+id/nomVar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="28dp"
-        android:text="pate"
+        android:text="@string/fake_title"
         app:layout_constraintStart_toEndOf="@+id/nom"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ing_var"
+        android:id="@+id/priceVar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="28dp"
-        android:text="eau, pates"
-        app:layout_constraintStart_toEndOf="@+id/ing"
-        app:layout_constraintTop_toBottomOf="@+id/nom_var" />
+        android:text="@string/fake_price"
+        app:layout_constraintStart_toEndOf="@+id/prix"
+        app:layout_constraintTop_toBottomOf="@+id/nomVar" />
+
+    <ImageView
+        android:id="@+id/imgSrc"
+        android:layout_width="104dp"
+        android:layout_height="102dp"
+        android:contentDescription="@string/logo_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

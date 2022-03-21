@@ -17,29 +17,22 @@ class ActivityHome : AppCompatActivity() {
         setContentView(view)
 
         binding.buttonEntry.setOnClickListener {
-            Toast.makeText(this@ActivityHome, "Entrées", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,CategorieActivity::class.java)
-            intent.putExtra("Category","Entrees")
-            startActivity(intent)
+            changeActivity("Entrées")
         }
-
-
         binding.buttonMain.setOnClickListener {
-            Toast.makeText(this@ActivityHome, "Plats", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,CategorieActivity::class.java)
-            intent.putExtra("Category","Plats")
-            startActivity(intent)
+            changeActivity("Plats")
         }
-
         binding.buttonDessert.setOnClickListener {
-            Toast.makeText(this@ActivityHome, "Desserts", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,CategorieActivity::class.java)
-            intent.putExtra("Category","Desserts")
-            startActivity(intent)
+            changeActivity("Desserts")
         }
 
     }
-
+    fun changeActivity(cat:String){
+        Toast.makeText(this@ActivityHome, cat, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this,CategorieActivity::class.java)
+        intent.putExtra("Category",cat)
+        startActivity(intent)
+    }
     override fun onDestroy() {
         super.onDestroy()
         Log.d("", "destroy")

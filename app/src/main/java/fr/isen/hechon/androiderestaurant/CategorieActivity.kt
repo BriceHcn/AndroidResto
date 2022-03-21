@@ -10,7 +10,6 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import fr.isen.hechon.androiderestaurant.databinding.ActivityCategorieBinding
-import fr.isen.hechon.androiderestaurant.databinding.ActivityHomeBinding
 import fr.isen.hechon.androiderestaurant.domain.ApiData
 import fr.isen.hechon.androiderestaurant.domain.Item
 import org.json.JSONObject
@@ -31,7 +30,7 @@ class CategorieActivity : AppCompatActivity() {
 
         //titre
         val categoryName = intent.getStringExtra("Category")
-        setTitle(categoryName)
+        title = categoryName
 
         //setup du recycler view
         val recyclerView: RecyclerView = binding.recyclerView
@@ -44,7 +43,7 @@ class CategorieActivity : AppCompatActivity() {
         getDataFromApi()
     }
 
-    fun getDataFromApi(){
+    private fun getDataFromApi(){
         val queue = Volley.newRequestQueue(this)
         val url = "http://test.api.catering.bluecodegames.com/menu"
         val json = JSONObject()
@@ -75,14 +74,16 @@ class CategorieActivity : AppCompatActivity() {
 
     fun fillRecyclerView(dataApi:ApiData){
         //TODO faire selon le parametre donné en entrées
-
-        dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
-
-        if(intent.getStringExtra("Category")=="Plats"){
-            dataApi.data[1].items.forEach { item: Item -> itemsList.add(item) }
-        }
-        if(intent.getStringExtra("Category")=="Desserts"){
-            dataApi.data[2].items.forEach { item: Item -> itemsList.add(item) }
+        when {
+            intent.getStringExtra("Category")=="Plats" -> {
+                dataApi.data[1].items.forEach { item: Item -> itemsList.add(item) }
+            }
+            intent.getStringExtra("Category")=="Desserts" -> {
+                dataApi.data[2].items.forEach { item: Item -> itemsList.add(item) }
+            }
+            else -> {
+                dataApi.data[0].items.forEach { item: Item -> itemsList.add(item) }
+            }
         }
         customAdapter.notifyDataSetChanged()
     }
