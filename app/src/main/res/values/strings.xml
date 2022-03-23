@@ -10,6 +10,11 @@
     <string name="dish_price">Titre Prix</string>
     <string name="fake_title">Saumon</string>
     <string name="fake_price">10 €</string>
+    <string name="fake_badge">0</string>
     <string name="panier">🛒</string>
+    <string name="x">x</string>
+    <string name="total">Total :</string>
+    <string name="fake_quantity">10</string>
+    <string name="equals">=</string>
 
 </resources>

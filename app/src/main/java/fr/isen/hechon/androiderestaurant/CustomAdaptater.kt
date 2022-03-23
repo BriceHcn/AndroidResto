@@ -35,7 +35,7 @@ internal class CustomAdapter(private var itemsList: List<Item>,private val onCli
         holder.priceVar.text= item.prices[0].price+" €"
 
         if (item.images[0].isEmpty()) {
-            holder.img.setImageResource(R.drawable.img_sympa)
+            holder.img.setImageResource(R.drawable.img)
         } else{
             Picasso.get().load(item.images[0]).into(holder.img)
         }

@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import fr.isen.hechon.androiderestaurant.databinding.ActivityHomeBinding
 
@@ -27,9 +26,9 @@ class ActivityHome : AppCompatActivity() {
         }
 
     }
-    fun changeActivity(cat:String){
+    private fun changeActivity(cat:String){
         Toast.makeText(this@ActivityHome, cat, Toast.LENGTH_SHORT).show()
-        val intent = Intent(this,CategorieActivity::class.java)
+        val intent = Intent(this,ActivityCategorie::class.java)
         intent.putExtra("Category",cat)
         startActivity(intent)
     }

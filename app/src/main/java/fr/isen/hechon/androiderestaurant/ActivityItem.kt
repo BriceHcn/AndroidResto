@@ -1,6 +1,7 @@
 package fr.isen.hechon.androiderestaurant
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -15,7 +16,7 @@ import fr.isen.hechon.androiderestaurant.domain.Panier
 import java.io.File
 
 
-class ItemActivity : AppCompatActivity() {
+class ActivityItem : AppCompatActivity() {
 
     private lateinit var binding : ActivityItemBinding
 
@@ -35,7 +36,7 @@ class ItemActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewpager)
         mViewPagerAdapter = ViewPagerAdapter(this, item.images)
         viewPager.pageMargin = 15
-        viewPager.setPadding(50, 0, 50, 0);
+        viewPager.setPadding(50, 0, 50, 0)
         viewPager.clipToPadding = false
         viewPager.pageMargin = 25
         viewPager.adapter = mViewPagerAdapter
@@ -51,14 +52,13 @@ class ItemActivity : AppCompatActivity() {
         binding.toolbar.title=item.name_fr
 
         //initialisation badge sur le panier
-        binding.textView.text=initPanierText()
+        binding.badgePanier.text=initPanierText()
 
         //number picker et modification bouton total
         binding.numberPicker.setPickerValue(1F)//
         """Total ${(item.prices[0].price.toFloat())} €""".also { binding.buttonTotal.text = it }
         binding.numberPicker.setClickNumberPickerListener { previousValue, currentValue, pickerClickType ->
             """Total ${(item.prices[0].price.toFloat()*currentValue)} €""".also { binding.buttonTotal.text = it }
-
         }
 
         //clic sur bouton ajout au panier
@@ -67,28 +67,25 @@ class ItemActivity : AppCompatActivity() {
             val snack = Snackbar.make(it,"${binding.numberPicker.value.toInt()} ${item.name_fr}  ajouté au panier",Snackbar.LENGTH_LONG)
             snack.show()
             //modification texte badge et ecriture dans le fichier panier
-            binding.textView.text=ecriturePanier(binding.numberPicker.value.toInt(),item)
+            binding.badgePanier.text=ecriturePanier(binding.numberPicker.value.toInt(),item)
         }
 
         //clic sur le bouton panier
         binding.btnPanier.setOnClickListener {
-            //todo afficher ecran panier /////////////////
-            Toast.makeText(this@ItemActivity, "panier", Toast.LENGTH_SHORT).show()
-
-            //lecture du fichier panier a mettre dans la prochaine activité
             val panier=lecturePanier()
-            Toast.makeText(this@ItemActivity, panier.lignes.size.toString(), Toast.LENGTH_SHORT).show()
-            //todo /////////////////////////////
+            Toast.makeText(this@ActivityItem, panier.lignes.size.toString(), Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,ActivityPanier::class.java)
+            startActivity(intent)
         }
     }
 
     private fun concantIng(item:Item):String{
         var ingredientsString=""
         item.ingredients.forEachIndexed{index,ingredient ->
-            if(index==item.ingredients.size-1){
-                ingredientsString+=ingredient.name_fr+"."
+            ingredientsString += if(index==item.ingredients.size-1){
+                ingredient.name_fr+"."
             }else{
-                ingredientsString+=ingredient.name_fr+", "
+                ingredient.name_fr+", "
             }
         }
         return ingredientsString
@@ -100,22 +97,20 @@ class ItemActivity : AppCompatActivity() {
         val file = File(binding.root.context.filesDir, filename1)
         //si le fichier existe on lit le panier directement dedans
         val panier:Panier
-        if(file.exists()){
+        return if(file.exists()){
             val contents = file.readText()
             panier = Gson().fromJson(contents,Panier::class.java)
-            return panier.lignes.size.toString()
-        }
-        else{
-            return "0"
+            panier.lignes.size.toString()
+        } else{
+            ""
         }
     }
-    private fun lecturePanier():Panier{
+    private fun lecturePanier(): Panier {
         //lecture fichier panier
         val filename = "panier.json"
         val file = File(binding.root.context.filesDir, filename)
         val contents = file.readText()
-        val panier = Gson().fromJson(contents,Panier::class.java)
-        return panier
+        return Gson().fromJson(contents, Panier::class.java)
     }
     private fun ecriturePanier(value: Int, item:Item): String {
         //sauvegarde du panier en json dans les fichiers
@@ -124,14 +119,13 @@ class ItemActivity : AppCompatActivity() {
         val filename1 = "panier.json"
         val file = File(binding.root.context.filesDir, filename1)
         //si le fichier existe on lit le panier directement dedans
-        val panier:Panier
-        if(file.exists()){
+        val panier:Panier = if(file.exists()){
             val contents = file.readText()
-            panier = Gson().fromJson(contents,Panier::class.java)
+            Gson().fromJson(contents,Panier::class.java)
         }
         //si le fichier n'existe pas on cree un panier vide
         else{
-            panier =Panier(ArrayList())
+            Panier(ArrayList())
         }
         //puis on ajoute notre element au panier et on ecrit le fichier
         panier.lignes.add(lignePanier)
@@ -144,7 +138,7 @@ class ItemActivity : AppCompatActivity() {
         return panier.lignes.size.toString()
     }
 
-    var viewPagerPageChangeListener: ViewPager.OnPageChangeListener =
+    private var viewPagerPageChangeListener: ViewPager.OnPageChangeListener =
         object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int,positionOffset: Float,positionOffsetPixels: Int) { }

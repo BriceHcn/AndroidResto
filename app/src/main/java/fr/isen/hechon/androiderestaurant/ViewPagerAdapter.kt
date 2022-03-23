@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.squareup.picasso.Picasso
 
@@ -15,10 +14,10 @@ class ViewPagerAdapter (private val mContext: Context, private  val itemList: Ar
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         layoutInflater = LayoutInflater.from(mContext)
         val view = layoutInflater!!.inflate(R.layout.carousel_item, container, false)
-        var imgItem: ImageView = view.findViewById(R.id.img_produit)
+        val imgItem: ImageView = view.findViewById(R.id.img_produit)
 
         if (itemList[position].isEmpty()) {
-            imgItem.setImageResource(R.drawable.img_sympa)
+            imgItem.setImageResource(R.drawable.img)
         } else{
             Picasso.get().load(itemList[position]).into(imgItem)
         }

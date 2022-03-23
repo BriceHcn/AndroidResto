@@ -18,7 +18,7 @@ import org.json.JSONObject
 import java.nio.charset.Charset
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 
-class CategorieActivity : AppCompatActivity() {
+class ActivityCategorie : AppCompatActivity() {
 
     private val itemsList = ArrayList<Item>()
     private lateinit var customAdapter: CustomAdapter
@@ -53,13 +53,13 @@ class CategorieActivity : AppCompatActivity() {
 
     private val refreshListener = OnRefreshListener {
         binding.swipeLayout.isRefreshing = false
-        itemsList.clear();
+        itemsList.clear()
         getDataFromApi()
     }
 
     private fun onListItemClick(item:Item) {
         Toast.makeText(this, item.name_fr, Toast.LENGTH_SHORT).show()
-        val intent = Intent(this,ItemActivity::class.java)
+        val intent = Intent(this,ActivityItem::class.java)
         intent.putExtra("Item",Gson().toJson(item))
         startActivity(intent)
     }
