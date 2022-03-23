@@ -52,6 +52,13 @@
         android:contentDescription="@string/logo_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/img" />
+        tools:srcCompat="@drawable/img_sympa" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#595858"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSrc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

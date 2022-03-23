@@ -1,7 +1,6 @@
 package fr.isen.hechon.androiderestaurant
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,7 +10,7 @@ import com.squareup.picasso.Picasso
 import fr.isen.hechon.androiderestaurant.databinding.ItemBinding
 import fr.isen.hechon.androiderestaurant.domain.Item
 
-internal class CustomAdapter(private var itemsList: List<Item>) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
+internal class CustomAdapter(private var itemsList: List<Item>,private val onClickListener: OnClickListener) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
 
     private lateinit var binding: ItemBinding
 
@@ -29,11 +28,14 @@ internal class CustomAdapter(private var itemsList: List<Item>) : RecyclerView.A
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = itemsList[position]
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
         holder.nameText.text=item.name_fr
         holder.priceVar.text= item.prices[0].price+" €"
 
         if (item.images[0].isEmpty()) {
-            holder.img.setImageResource(R.drawable.img)
+            holder.img.setImageResource(R.drawable.img_sympa)
         } else{
             Picasso.get().load(item.images[0]).into(holder.img)
         }
@@ -41,4 +43,10 @@ internal class CustomAdapter(private var itemsList: List<Item>) : RecyclerView.A
     override fun getItemCount(): Int {
         return itemsList.size
     }
+
+
+    class OnClickListener(val clickListener: (item: Item) -> Unit) {
+        fun onClick(item: Item) = clickListener(item)
+    }
+
 }
