@@ -137,6 +137,11 @@ class ActivityItem : AppCompatActivity() {
     private fun ecriturePanier(value: Int, item:Item,com:String): String {
         //sauvegarde du panier en json dans les fichiers
         val lignePanier= LignePanier(value,item,com)
+
+        //ecriture nombre d'article dans panier
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        sharedPref.edit().putInt("nbItemPanier", value)
+
         //lecture du fichier
         val filename1 = "panier.json"
         val file = File(binding.root.context.filesDir, filename1)
