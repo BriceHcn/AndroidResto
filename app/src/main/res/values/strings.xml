@@ -16,5 +16,8 @@
     <string name="total">Total :</string>
     <string name="fake_quantity">10</string>
     <string name="equals">=</string>
+    <string name="passer_ma_commande">Passer ma commande</string>
+    <string name="commentaire_s">Indique un commentaire(s)</string>
+    <string name="fake_com">Bien cuit stp le sang</string>
 
 </resources>

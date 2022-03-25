@@ -1,9 +1,19 @@
 package fr.isen.hechon.androiderestaurant
 
+import android.Manifest
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.telephony.SmsManager
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -17,47 +27,85 @@ class ActivityPanier : AppCompatActivity() {
     private lateinit var binding : ActivityPanierBinding
     private val itemsList = ArrayList<LignePanier>()
     private lateinit var panierAdapter: PanierAdapter
+    private lateinit var panier:Panier
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPanierBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val panier = lecturePanier()
 
+        panier = lecturePanier()
+        //titre fenetre
         title="Panier"
 
         //setup du recycler view
         val recyclerPanier: RecyclerView = binding.recyclerPanier
-        panierAdapter = PanierAdapter(itemsList)
+        panierAdapter = PanierAdapter(itemsList,PanierAdapter.OnClickListener { item ->
+            onListPanierClickDelete(item)
+        })
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerPanier.layoutManager = layoutManager
         recyclerPanier.adapter = panierAdapter
-
         panier.lignes.forEach { ligne: LignePanier-> itemsList.add(ligne) }
         panierAdapter.notifyDataSetChanged()
-        var grandTotalPrice = 0
-            panier.lignes.forEach { ligne:LignePanier -> grandTotalPrice+=ligne.Item.prices[0].price.toInt()*ligne.quantite }
-        binding.GrandTotalPrice.text=grandTotalPrice.toString()+" €"
 
+        //prix
+        updateTotalPrice()
+
+        //boutton passer commande
         binding.button.setOnClickListener {
-            val number = "0641973974"
-            val intent = Intent(Intent.ACTION_CALL)
-            intent.data = Uri.parse("tel:$number")
-            startActivity(intent)
+
+            //startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:0641973974")))
+            var cmd ="Bravo Brice 20/20 - Le prof d'android. Voici le contenu de ma commande :\n"
+            panier.lignes.forEach { ligne:LignePanier -> cmd+="${ligne.Item.name_fr} * ${ligne.quantite} (${ligne.com})\n" }
+            sendSMS("+33641973974", cmd)
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/brice-hechon/")))
         }
     }
 
-    //todo grouper les items du meme type dans le panier
-    //todo permettre de supprimer des items dans le panier
-    //todo passer la commande
-    //todo btn panier dans la liste de produits aussi
+
+    private fun sendSMS(phoneNumber: String, message: String) {
+
+        val sentPI: PendingIntent = PendingIntent.getBroadcast(this, 0, Intent("SMS_SENT"), 0)
+        SmsManager.getDefault().sendTextMessage(phoneNumber, null, message, sentPI, null)
+    }
+
+    private fun updateTotalPrice(){
+        var grandTotalPrice = 0.0F
+        this.panier.lignes.forEach { ligne:LignePanier -> grandTotalPrice+=ligne.Item.prices[0].price.toFloat()*ligne.quantite }
+        binding.GrandTotalPrice.text=grandTotalPrice.toString()+" €"
+    }
+
+    private fun onListPanierClickDelete(item: LignePanier) {
+        Toast.makeText(this@ActivityPanier, "${item.quantite} ${item.Item.name_fr} enlevé(s) du panier",Toast.LENGTH_SHORT).show()
+        this.itemsList.remove(item)
+        this.panier.lignes.remove(item)
+        Log.d("PANIER",panier.lignes.size.toString())
+        this.ecriturePanier()
+        this.updateTotalPrice()
+        this.panierAdapter.notifyDataSetChanged()
+    }
+
+    private fun ecriturePanier(){
+        //sauvegarde du panier en json dans les fichiers
+        val panierJson = Gson().toJson(panier)
+        val filename = "panier.json"
+        this.binding.root.context.openFileOutput(filename, Context.MODE_PRIVATE).use {
+            it.write(panierJson.toByteArray())
+        }
+    }
 
     private fun lecturePanier(): Panier {
         //lecture fichier panier
         val filename = "panier.json"
         val file = File(binding.root.context.filesDir, filename)
-        val contents = file.readText()
-        return Gson().fromJson(contents, Panier::class.java)
+        if(file.exists()){
+            val contents = file.readText()
+            return Gson().fromJson(contents, Panier::class.java)
+        }else{
+            return Panier(ArrayList())
+        }
     }
 }
