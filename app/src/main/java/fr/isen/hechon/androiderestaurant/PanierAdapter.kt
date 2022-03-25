@@ -1,16 +1,14 @@
 package fr.isen.hechon.androiderestaurant
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import fr.isen.hechon.androiderestaurant.domain.LignePanier
 import fr.isen.hechon.androiderestaurant.databinding.ItemPanierBinding
-import fr.isen.hechon.androiderestaurant.domain.Item
+import fr.isen.hechon.androiderestaurant.domain.LignePanier
 
 
-internal class PanierAdapter(private var itemsList: MutableList<LignePanier>,private val onClickListener: PanierAdapter.OnClickListener) : RecyclerView.Adapter<PanierAdapter.MyViewHolder>() {
+internal class PanierAdapter(private var itemsList: MutableList<LignePanier>,private val onClickListener: OnClickListener) : RecyclerView.Adapter<PanierAdapter.MyViewHolder>() {
 
     private lateinit var binding: ItemPanierBinding
 

@@ -1,13 +1,12 @@
 package fr.isen.hechon.androiderestaurant
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import fr.isen.hechon.androiderestaurant.databinding.ActivityHomeBinding
@@ -36,7 +35,7 @@ class ActivityHome : AppCompatActivity() {
     private fun getPermission(){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this@ActivityHome,arrayOf(Manifest.permission.SEND_SMS),1);
+            ActivityCompat.requestPermissions(this@ActivityHome,arrayOf(Manifest.permission.SEND_SMS),1)
         }
     }
 

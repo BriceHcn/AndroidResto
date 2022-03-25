@@ -20,7 +20,6 @@ import java.io.File
 class ActivityItem : AppCompatActivity() {
 
     private lateinit var binding : ActivityItemBinding
-
     private lateinit var viewPager: ViewPager
     private lateinit var mViewPagerAdapter: ViewPagerAdapter
     private lateinit var panier:Panier
@@ -57,7 +56,7 @@ class ActivityItem : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         //initialisation badge sur le panier
-        binding.badgePanier.text=initPanierText()
+        binding.badgePanier.text=initPanierBadge()
 
         //number picker et modification bouton total
         binding.numberPicker.setPickerValue(1F)//
@@ -109,7 +108,7 @@ class ActivityItem : AppCompatActivity() {
         }
         return ingredientsString
     }
-    private fun initPanierText():String{
+    private fun initPanierBadge():String{
         //sauvegarde du panier en json dans les fichiers
         //lecture du fichier
         val filename1 = "panier.json"
@@ -128,11 +127,11 @@ class ActivityItem : AppCompatActivity() {
         //lecture fichier panier
         val filename = "panier.json"
         val file = File(binding.root.context.filesDir, filename)
-        if(file.exists()){
+        return if(file.exists()){
             val contents = file.readText()
-            return Gson().fromJson(contents, Panier::class.java)
+            Gson().fromJson(contents, Panier::class.java)
         }else{
-            return Panier(ArrayList())
+            Panier(ArrayList())
         }
     }
     private fun ecriturePanier(value: Int, item:Item,com:String): String {
