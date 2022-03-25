@@ -28,14 +28,27 @@ class ActivityHome : AppCompatActivity() {
         binding.buttonDessert.setOnClickListener {
             changeActivity("Desserts")
         }
+        //clic sur le logo
+        binding.LogoApp.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "BLE", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,BLEScanActivity::class.java)
+            startActivity(intent)
+        }
+
+        //boutton nous trouver
+        binding.findUs.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "Maps", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,MapsActivity::class.java)
+            startActivity(intent)
+        }
 
         //permission granting
         getPermission()
     }
     private fun getPermission(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SET_WALLPAPER) != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(this@ActivityHome,arrayOf(Manifest.permission.SEND_SMS),1)
+            ActivityCompat.requestPermissions(this@ActivityHome,arrayOf(Manifest.permission.SET_WALLPAPER),1)
         }
     }
 

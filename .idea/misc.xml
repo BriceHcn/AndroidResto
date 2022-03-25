@@ -5,14 +5,17 @@
       <map>
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
+        <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_ble.xml" value="0.1" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_categorie.xml" value="0.264" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_desserts.xml" value="0.16302083333333334" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_item.xml" value="0.4" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_maps.xml" value="0.2" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/activity_panier.xml" value="0.24659090909090908" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/carousel_item.xml" value="0.16" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/fragment_custom.xml" value="0.13381787088499358" />
+        <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/fragment_maps.xml" value="0.11500641299700727" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/fragment_screen_slide_page.xml" value="0.2" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/item.xml" value="0.4" />
         <entry key="..\:/Documents/Bureau/AndroidERestaurant/app/src/main/res/layout/item_panier.xml" value="0.6" />

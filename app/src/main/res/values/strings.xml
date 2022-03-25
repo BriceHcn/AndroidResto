@@ -19,5 +19,8 @@
     <string name="passer_ma_commande">Passer ma commande</string>
     <string name="commentaire_s">Indique un commentaire(s)</string>
     <string name="fake_com">Bien cuit stp le sang</string>
+    <string name="title_activity_maps">Notre situation géographique</string>
+    <string name="nous_rejoindre">nous rejoindre</string>
+    <string name="nous_trouver">🗺 Nous trouver</string>
 
 </resources>

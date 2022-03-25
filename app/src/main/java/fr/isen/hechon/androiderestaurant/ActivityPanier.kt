@@ -33,17 +33,17 @@ class ActivityPanier : AppCompatActivity() {
 
         panier = lecturePanier()
         //titre fenetre
-        title="Panier"
+        title = "Panier"
 
         //setup du recycler view
         val recyclerPanier: RecyclerView = binding.recyclerPanier
-        panierAdapter = PanierAdapter(itemsList,PanierAdapter.OnClickListener { item ->
+        panierAdapter = PanierAdapter(itemsList, PanierAdapter.OnClickListener { item ->
             onListPanierClickDelete(item)
         })
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerPanier.layoutManager = layoutManager
         recyclerPanier.adapter = panierAdapter
-        panier.lignes.forEach { ligne: LignePanier-> itemsList.add(ligne) }
+        panier.lignes.forEach { ligne: LignePanier -> itemsList.add(ligne) }
         panierAdapter.notifyDataSetChanged()
 
         //prix
@@ -55,11 +55,12 @@ class ActivityPanier : AppCompatActivity() {
             //startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:0641973974")))
             var cmd ="Bravo Brice 20/20 - Le prof d'android. Voici le contenu de ma commande :\n"
             panier.lignes.forEach { ligne:LignePanier -> cmd+="${ligne.Item.name_fr} * ${ligne.quantite} (${ligne.com})\n" }
-            sendSMS("+33641973974", cmd)
+            //sendSMS("+33641973974", cmd)
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/brice-hechon/")))
+
+
         }
     }
-
 
     private fun sendSMS(phoneNumber: String, message: String) {
 

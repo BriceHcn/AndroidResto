@@ -3,15 +3,16 @@ package fr.isen.hechon.androiderestaurant
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import fr.isen.hechon.androiderestaurant.databinding.ActivityItemBinding
-import fr.isen.hechon.androiderestaurant.databinding.PanierBadgeBinding
 import fr.isen.hechon.androiderestaurant.domain.Item
 import fr.isen.hechon.androiderestaurant.domain.LignePanier
 import fr.isen.hechon.androiderestaurant.domain.Panier
@@ -110,6 +111,7 @@ class ActivityItem : AppCompatActivity() {
         }
         return ingredientsString
     }
+
     private fun initPanierBadge():String{
         //sauvegarde du panier en json dans les fichiers
         //lecture du fichier
