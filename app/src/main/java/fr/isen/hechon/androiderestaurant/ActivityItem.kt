@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import fr.isen.hechon.androiderestaurant.databinding.ActivityItemBinding
+import fr.isen.hechon.androiderestaurant.databinding.PanierBadgeBinding
 import fr.isen.hechon.androiderestaurant.domain.Item
 import fr.isen.hechon.androiderestaurant.domain.LignePanier
 import fr.isen.hechon.androiderestaurant.domain.Panier
@@ -57,6 +58,7 @@ class ActivityItem : AppCompatActivity() {
 
         //initialisation badge sur le panier
         binding.badgePanier.text=initPanierBadge()
+
 
         //number picker et modification bouton total
         binding.numberPicker.setPickerValue(1F)//
