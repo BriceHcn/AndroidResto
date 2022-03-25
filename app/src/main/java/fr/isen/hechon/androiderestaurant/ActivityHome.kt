@@ -28,6 +28,19 @@ class ActivityHome : AppCompatActivity() {
         binding.buttonDessert.setOnClickListener {
             changeActivity("Desserts")
         }
+        //clic sur le logo
+        binding.LogoApp.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "BLE", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,BLEScanActivity::class.java)
+            startActivity(intent)
+        }
+
+        //boutton nous trouver
+        binding.findUs.setOnClickListener {
+            Toast.makeText(this@ActivityHome, "Maps", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,MapsActivity::class.java)
+            startActivity(intent)
+        }
 
         //permission granting
         getPermission()
