@@ -26,28 +26,8 @@
             tools:layout_editor_absoluteY="5dp"
             android:layout_gravity="end">
 
-            <TextView
-                android:id="@+id/btn_panier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:paddingEnd="30dip"
-                android:text="@string/panier"
-                android:textSize="34sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+           <include layout="@layout/panier_badge"/>
 
-            <TextView
-                android:id="@+id/badge_panier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-45dp"
-                android:text="@string/fake_badge"
-                android:textColor="#FB0000"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/btn_panier"
-                app:layout_constraintTop_toTopOf="@+id/btn_panier" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>

@@ -60,9 +60,9 @@ class ActivityItem : AppCompatActivity() {
 
         //number picker et modification bouton total
         binding.numberPicker.setPickerValue(1F)//
-        """Total ${(item.prices[0].price.toFloat())} €""".also { binding.buttonTotal.text = it }
+        """Ajouter au panier - Total ${(item.prices[0].price.toFloat())} €""".also { binding.buttonTotal.text = it }
         binding.numberPicker.setClickNumberPickerListener { previousValue, currentValue, pickerClickType ->
-            """Total ${(item.prices[0].price.toFloat()*currentValue)} €""".also { binding.buttonTotal.text = it }
+            """Ajouter au panier - Total ${(item.prices[0].price.toFloat()*currentValue)} €""".also { binding.buttonTotal.text = it }
         }
 
 
