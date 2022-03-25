@@ -2,6 +2,7 @@ package fr.isen.hechon.androiderestaurant
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -88,6 +89,7 @@ class ActivityItem : AppCompatActivity() {
         }
 
         binding.toolbar.title=item.name_fr
+        binding.toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"))
     }
 
     override fun onRestart() {
