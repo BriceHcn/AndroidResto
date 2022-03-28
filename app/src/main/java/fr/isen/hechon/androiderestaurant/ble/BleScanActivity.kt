@@ -11,7 +11,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -19,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.hechon.androiderestaurant.R
 import fr.isen.hechon.androiderestaurant.databinding.ActivityBleBinding
-
 
 class BleScanActivity : AppCompatActivity() {
     companion object{
@@ -32,7 +33,8 @@ class BleScanActivity : AppCompatActivity() {
         bluetoothManager.adapter
     }
 
-    private val itemsList = ArrayList<ScanResult>()
+    private var itemsList = ArrayList<ScanResult>()
+
     private lateinit var listBleAdapter: ListBleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +57,24 @@ class BleScanActivity : AppCompatActivity() {
 
 
         val recyclerBle: RecyclerView = binding.ListBleScan
-        listBleAdapter = ListBleAdapter(itemsList)
+        listBleAdapter = ListBleAdapter(itemsList, ListBleAdapter.OnClickListener { item ->
+            onListBleClick(item)
+        })
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerBle.layoutManager = layoutManager
         recyclerBle.adapter = listBleAdapter
 
     }
+
+    @SuppressLint("MissingPermission")
+    private fun onListBleClick(item: ScanResult) {
+        if(item.device.name.isNullOrEmpty()){
+            Toast.makeText(this@BleScanActivity, "Unknown name", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this@BleScanActivity, item.device.name.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onStop(){
         super.onStop()
         startLeScanBLEWithPermission(false)
@@ -102,6 +116,14 @@ class BleScanActivity : AppCompatActivity() {
 
         bluetoothAdapter?.bluetoothLeScanner?.apply {
             if(enable) {
+                val handler = Handler(mainLooper)
+                handler.postDelayed({
+                    scanning=false// stop scanning here
+                    binding.imgPlayBle.setImageResource(R.drawable.play)
+                    binding.textScan.text = getString(R.string.lancer_scan)
+                    binding.progressBarScanBle.isIndeterminate = false
+                    stopScan(scanCallBack)
+                }, 15000)
                 scanning=true
                 startScan(scanCallBack)
             }else{
@@ -112,13 +134,14 @@ class BleScanActivity : AppCompatActivity() {
         }
     }
 
-private val scanCallBack = object : ScanCallback(){
+    private val scanCallBack = object : ScanCallback(){
     override fun onScanResult(callBackType : Int, result:ScanResult){
         Log.d("BLEScanActivity","${result.device.address} - ${result.rssi}")
         addToList(result)
 
     }
 }
+
     private fun addToList(res:ScanResult){
         val index:Int = itemsList.indexOfFirst{ it.device.address==res.device.address }
         if(index == -1){
