@@ -31,7 +31,9 @@ class ActivityPanier : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        //recuperation panier depuis fichier
         panier = lecturePanier()
+
         //titre fenetre
         title = "Panier"
 

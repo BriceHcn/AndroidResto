@@ -1,14 +1,11 @@
 package fr.isen.hechon.androiderestaurant
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import fr.isen.hechon.androiderestaurant.ble.BleScanActivity
 import fr.isen.hechon.androiderestaurant.databinding.ActivityHomeBinding
 
 class ActivityHome : AppCompatActivity() {
@@ -31,7 +28,7 @@ class ActivityHome : AppCompatActivity() {
         //clic sur le logo
         binding.LogoApp.setOnClickListener {
             Toast.makeText(this@ActivityHome, "BLE", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,BLEScanActivity::class.java)
+            val intent = Intent(this, BleScanActivity::class.java)
             startActivity(intent)
         }
 
@@ -41,16 +38,8 @@ class ActivityHome : AppCompatActivity() {
             val intent = Intent(this,MapsActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        //permission granting
-        getPermission()
-    }
-    private fun getPermission(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.SET_WALLPAPER) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this@ActivityHome,arrayOf(Manifest.permission.SET_WALLPAPER),1)
-        }
-    }
 
     private fun changeActivity(cat:String){
         Toast.makeText(this@ActivityHome, cat, Toast.LENGTH_SHORT).show()

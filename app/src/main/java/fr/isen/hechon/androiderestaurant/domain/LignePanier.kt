@@ -1,3 +1,3 @@
 package fr.isen.hechon.androiderestaurant.domain
 
-data class LignePanier (val quantite:Int,val Item:Item, val com:String)
+data class LignePanier (var quantite:Int, val Item:Item, val com:String)

@@ -22,5 +22,12 @@
     <string name="title_activity_maps">Notre situation géographique</string>
     <string name="nous_rejoindre">nous rejoindre</string>
     <string name="nous_trouver">🗺 Nous trouver</string>
+    <string name="lancer_scan">Lancer le scan BLE</string>
+    <string name="scan_loading">Scan BLE en cours ...</string>
+    <string name="_00_00_00_00_00">00:00:00:00:00</string>
+    <string name="superbledevice">SuperBleDevice</string>
+    <string name="_93db">-93db</string>
+    <string name="db">Db</string>
+
 
 </resources>
