@@ -19,6 +19,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import fr.isen.hechon.androiderestaurant.ActivityItem
 import fr.isen.hechon.androiderestaurant.R
 import fr.isen.hechon.androiderestaurant.databinding.ActivityBleBinding
 
@@ -73,6 +75,9 @@ class BleScanActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this@BleScanActivity, item.device.name.toString(), Toast.LENGTH_SHORT).show()
         }
+        val intent = Intent(this, BLEDeviceActivity::class.java)
+        intent.putExtra("Device", item)
+        startActivity(intent)
     }
 
     override fun onStop(){
