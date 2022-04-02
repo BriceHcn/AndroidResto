@@ -43,6 +43,7 @@
         android:layout_width="409dp"
         android:layout_height="773dp"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="120dp"
         app:layout_constraintTop_toBottomOf="@+id/progressBarScanBle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

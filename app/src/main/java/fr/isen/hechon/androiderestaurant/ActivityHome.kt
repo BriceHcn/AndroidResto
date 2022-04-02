@@ -27,9 +27,11 @@ class ActivityHome : AppCompatActivity() {
         }
         //clic sur le logo
         binding.LogoApp.setOnClickListener {
-            Toast.makeText(this@ActivityHome, "BLE", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, BleScanActivity::class.java)
-            startActivity(intent)
+            openBle()
+        }
+        //et sur le bouton ble
+        binding.btnBle.setOnClickListener{
+            openBle()
         }
 
         //boutton nous trouver
@@ -38,6 +40,12 @@ class ActivityHome : AppCompatActivity() {
             val intent = Intent(this,MapsActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun openBle() {
+        Toast.makeText(this@ActivityHome, "BLE", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, BleScanActivity::class.java)
+        startActivity(intent)
     }
 
 

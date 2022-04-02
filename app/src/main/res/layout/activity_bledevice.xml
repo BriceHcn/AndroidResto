@@ -4,14 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ble.BLEDeviceActivity"
-
-
-
-
-    >
+    tools:context=".ble.BLEDeviceActivity">
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,9 +33,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:text="Marc"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Marc" />
 
             <TextView
                 android:id="@+id/device_satus_title"
@@ -59,12 +56,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="test"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/device_satus_title" />
+                app:layout_constraintStart_toEndOf="@+id/device_satus_title"
+                tools:text="Pas Connecté" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bleServicesList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

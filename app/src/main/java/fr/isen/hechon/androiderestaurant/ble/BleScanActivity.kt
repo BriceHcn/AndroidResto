@@ -19,14 +19,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
-import fr.isen.hechon.androiderestaurant.ActivityItem
 import fr.isen.hechon.androiderestaurant.R
 import fr.isen.hechon.androiderestaurant.databinding.ActivityBleBinding
 
 class BleScanActivity : AppCompatActivity() {
     companion object{
         private const val ALL_PERMISSION_REQUEST_CODE = 1
+        private const val DEVICE_KEY="Device"
     }
     private var scanning:Boolean=false
     private lateinit var binding : ActivityBleBinding
@@ -76,7 +75,7 @@ class BleScanActivity : AppCompatActivity() {
             Toast.makeText(this@BleScanActivity, item.device.name.toString(), Toast.LENGTH_SHORT).show()
         }
         val intent = Intent(this, BLEDeviceActivity::class.java)
-        intent.putExtra("Device", item)
+        intent.putExtra(DEVICE_KEY, item.device)
         startActivity(intent)
     }
 

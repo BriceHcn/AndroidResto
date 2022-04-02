@@ -8,7 +8,6 @@ plugins {
 
 android {
     compileSdk 32
-
     defaultConfig {
         applicationId "fr.isen.hechon.androiderestaurant"
         minSdk 23
@@ -18,7 +17,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -31,7 +29,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-
     }
     buildFeatures{
         viewBinding true
@@ -39,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -55,6 +51,5 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.github.polok:clicknumberpicker:0.1.2'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
-
-
+    implementation 'com.thoughtbot:expandablerecyclerview:1.4'
 }

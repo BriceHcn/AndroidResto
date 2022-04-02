@@ -29,6 +29,23 @@
     <string name="_93db">-93db</string>
     <string name="db">Db</string>
     <string name="croix">❌</string>
+    <string name="ble_device_disconnected">Deconnecté</string>
+    <string name="ble_device_characteristic_read">Lecture</string>
+    <string name="ble_device_characteristic_write">Ecrire</string>
+    <string name="ble_device_characteristic_notify">Notifier</string>
+    <string name="ble_device_write_characteristic_title">Ecrire la valeur</string>
+    <string name="ble_device_write_characteristic_confirm">Valider</string>
+    <string name="ble_device_write_characteristic_cancel">Annuler</string>
+    <string name="type_chara">Type chara</string>
+    <string name="ecrire">ecrire</string>
+    <string name="lire">lire</string>
+    <string name="notifier">notifier</string>
+    <string name="uuid">uuid : df</string>
+    <string name="proprietes">propriétés : sdr</string>
+    <string name="valeur">valeur :</string>
+    <string name="service">Artist</string>
+    <string name="uuidService">uuid</string>
+    <string name="ble_btn">📱 BLE</string>
 
 
 </resources>
