@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:paddingEnd="30dip"
+                android:paddingStart="0dp"
                 android:text="@string/panier"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"

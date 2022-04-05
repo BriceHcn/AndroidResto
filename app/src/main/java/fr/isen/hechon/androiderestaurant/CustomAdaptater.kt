@@ -1,5 +1,6 @@
 package fr.isen.hechon.androiderestaurant
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,7 +11,7 @@ import com.squareup.picasso.Picasso
 import fr.isen.hechon.androiderestaurant.databinding.ItemBinding
 import fr.isen.hechon.androiderestaurant.domain.Item
 
-internal class CustomAdapter(private var itemsList: List<Item>,private val onClickListener: OnClickListener) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
+internal class CustomAdapter(private var itemsList: List<Item>,private val onClickListener: OnClickListener,private val context: Context) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
 
     private lateinit var binding: ItemBinding
 
@@ -32,7 +33,7 @@ internal class CustomAdapter(private var itemsList: List<Item>,private val onCli
             onClickListener.onClick(item)
         }
         holder.nameText.text=item.name_fr
-        holder.priceVar.text= item.prices[0].price+" €"
+        holder.priceVar.text= context.getString(R.string.euro,item.prices[0].price)
 
         if (item.images[0].isEmpty()) {
             holder.img.setImageResource(R.drawable.img)

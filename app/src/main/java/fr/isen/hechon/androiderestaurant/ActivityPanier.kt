@@ -1,11 +1,9 @@
 package fr.isen.hechon.androiderestaurant
 
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.telephony.SmsManager
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +39,7 @@ class ActivityPanier : AppCompatActivity() {
         val recyclerPanier: RecyclerView = binding.recyclerPanier
         panierAdapter = PanierAdapter(itemsList, PanierAdapter.OnClickListener { item ->
             onListPanierClickDelete(item)
-        })
+        },this@ActivityPanier)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerPanier.layoutManager = layoutManager
         recyclerPanier.adapter = panierAdapter
@@ -64,16 +62,10 @@ class ActivityPanier : AppCompatActivity() {
         }
     }
 
-    private fun sendSMS(phoneNumber: String, message: String) {
-
-        val sentPI: PendingIntent = PendingIntent.getBroadcast(this, 0, Intent("SMS_SENT"), 0)
-        SmsManager.getDefault().sendTextMessage(phoneNumber, null, message, sentPI, null)
-    }
-
     private fun updateTotalPrice(){
         var grandTotalPrice = 0.0F
         this.panier.lignes.forEach { ligne:LignePanier -> grandTotalPrice+=ligne.Item.prices[0].price.toFloat()*ligne.quantite }
-        binding.GrandTotalPrice.text=grandTotalPrice.toString()+" €"
+        binding.GrandTotalPrice.text=getString(R.string.euro,grandTotalPrice.toString())
     }
 
     private fun onListPanierClickDelete(item: LignePanier) {

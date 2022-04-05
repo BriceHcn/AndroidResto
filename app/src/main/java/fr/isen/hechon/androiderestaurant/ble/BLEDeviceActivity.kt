@@ -11,11 +11,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import fr.isen.hechon.androiderestaurant.R
 import fr.isen.hechon.androiderestaurant.databinding.ActivityBledeviceBinding
 import java.util.*
 
 
 class BLEDeviceActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityBledeviceBinding
     private var bluetoothGatt: BluetoothGatt? = null
     private var timer: Timer? = null
@@ -29,8 +31,8 @@ class BLEDeviceActivity : AppCompatActivity() {
 
         val device = intent.getParcelableExtra<BluetoothDevice?>("Device")
         Toast.makeText(this, device?.address, Toast.LENGTH_SHORT).show()
-        binding.deviceName.text = device?.name ?: "Nom Inconnu"
-        binding.deviceStatus.text = "Deconnecté"
+        binding.deviceName.text = device?.name ?: getString(R.string.unknown_name)
+        binding.deviceStatus.text = getString(R.string.disconnected)
 
         connectToDevice(device)
     }
@@ -59,10 +61,10 @@ class BLEDeviceActivity : AppCompatActivity() {
             when (newState) {
                 BluetoothGatt.STATE_CONNECTED -> {
                     gatt?.discoverServices()
-                    runOnUiThread {  binding.deviceStatus.text = "Connecté"}
+                    runOnUiThread {  binding.deviceStatus.text = getString(R.string.connected)}
                 }
-                BluetoothGatt.STATE_CONNECTING -> { runOnUiThread {  binding.deviceStatus.text = "Connexion en cours"} }
-                else -> {runOnUiThread {  binding.deviceStatus.text = "Pas connecté"}
+                BluetoothGatt.STATE_CONNECTING -> { runOnUiThread {  binding.deviceStatus.text = getString(R.string.connecting)} }
+                else -> {runOnUiThread {  binding.deviceStatus.text = getString(R.string.disconnected)}
                 }
             }
         }

@@ -18,6 +18,7 @@
     <string name="equals">=</string>
     <string name="passer_ma_commande">Passer ma commande</string>
     <string name="commentaire_s">Indique un commentaire(s)</string>
+    <string name="com">Commentaire(s) : %1$s</string>
     <string name="fake_com">Bien cuit stp le sang</string>
     <string name="title_activity_maps">Notre situation géographique</string>
     <string name="nous_rejoindre">nous rejoindre</string>
@@ -29,6 +30,7 @@
     <string name="superbledevice">SuperBleDevice</string>
     <string name="_93db">-93db</string>
     <string name="db">%1$d Db</string>
+    <string name="euro">%1$s €</string>
     <string name="croix">❌</string>
     <string name="ble_device_disconnected">Deconnecté</string>
     <string name="ble_device_characteristic_read">Lecture</string>
@@ -47,6 +49,11 @@
     <string name="service">Artist</string>
     <string name="uuidService">uuid</string>
     <string name="ble_btn">📱 BLE</string>
+    <string name="disconnected">Deconnecté</string>
+    <string name="connected">Connecté</string>
+    <string name="connecting">Connexion en cours</string>
+    <string name="statut">Statut :</string>
+    <string name="derouler">derouler</string>
 
 
 </resources>

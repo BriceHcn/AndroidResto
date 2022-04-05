@@ -3,7 +3,6 @@ package fr.isen.hechon.androiderestaurant.ble
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder
 import fr.isen.hechon.androiderestaurant.R
 import java.util.*
-import kotlin.collections.ArrayList
 
 class BleServiceAdapter (private val bleServices:List<BLEService>,
                          private val context: Context,

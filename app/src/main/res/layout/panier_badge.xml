@@ -10,6 +10,7 @@
         android:layout_width="72dp"
         android:layout_height="48dp"
         android:paddingEnd="30dip"
+        android:paddingStart="0dp"
         android:text="@string/panier"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"

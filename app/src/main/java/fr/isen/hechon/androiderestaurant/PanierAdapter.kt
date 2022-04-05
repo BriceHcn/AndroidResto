@@ -1,5 +1,6 @@
 package fr.isen.hechon.androiderestaurant
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.NonNull
@@ -8,7 +9,7 @@ import fr.isen.hechon.androiderestaurant.databinding.ItemPanierBinding
 import fr.isen.hechon.androiderestaurant.domain.LignePanier
 
 
-internal class PanierAdapter(private var itemsList: MutableList<LignePanier>,private val onClickListener: OnClickListener) : RecyclerView.Adapter<PanierAdapter.MyViewHolder>() {
+internal class PanierAdapter(private var itemsList: MutableList<LignePanier>,private val onClickListener: OnClickListener,private val context: Context) : RecyclerView.Adapter<PanierAdapter.MyViewHolder>() {
 
     private lateinit var binding: ItemPanierBinding
 
@@ -29,11 +30,11 @@ internal class PanierAdapter(private var itemsList: MutableList<LignePanier>,pri
         val item = itemsList[position]
         holder.name.text=item.Item.name_fr
         holder.quantity.text=item.quantite.toString()
-        holder.totalItemPrice.text=(item.Item.prices[0].price.toFloat()*item.quantite).toString()+" €"
+        holder.totalItemPrice.text=context.getString(R.string.euro,(item.Item.prices[0].price.toFloat()*item.quantite).toString())
         holder.btnDelete.setOnClickListener {
             onClickListener.onClick(item)
         }
-        holder.com.text="Commentaire :${item.com}"
+        holder.com.text=context.getString(R.string.com,item.com)
     }
     override fun getItemCount(): Int {
         return itemsList.size

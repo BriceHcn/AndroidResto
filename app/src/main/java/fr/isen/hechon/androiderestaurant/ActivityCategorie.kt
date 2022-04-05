@@ -39,7 +39,7 @@ class ActivityCategorie : AppCompatActivity() {
         //setup click sur item
         customAdapter = CustomAdapter(itemsList,CustomAdapter.OnClickListener { item ->
             onListItemClick(item)
-        })
+        },this@ActivityCategorie)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = customAdapter
