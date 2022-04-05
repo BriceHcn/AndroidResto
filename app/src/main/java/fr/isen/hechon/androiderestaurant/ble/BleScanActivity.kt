@@ -26,6 +26,8 @@ class BleScanActivity : AppCompatActivity() {
     companion object{
         private const val ALL_PERMISSION_REQUEST_CODE = 1
         private const val DEVICE_KEY="Device"
+        private const val MAX_RSSI = 90
+        private const val SCAN_DELAY = 15000
     }
     private var scanning:Boolean=false
     private lateinit var binding : ActivityBleBinding
@@ -60,7 +62,8 @@ class BleScanActivity : AppCompatActivity() {
         val recyclerBle: RecyclerView = binding.ListBleScan
         listBleAdapter = ListBleAdapter(itemsList, ListBleAdapter.OnClickListener { item ->
             onListBleClick(item)
-        })
+        },
+        this@BleScanActivity)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerBle.layoutManager = layoutManager
         recyclerBle.adapter = listBleAdapter
@@ -70,7 +73,7 @@ class BleScanActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun onListBleClick(item: ScanResult) {
         if(item.device.name.isNullOrEmpty()){
-            Toast.makeText(this@BleScanActivity, "Unknown name", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@BleScanActivity, getString(R.string.unknown_name), Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(this@BleScanActivity, item.device.name.toString(), Toast.LENGTH_SHORT).show()
         }
@@ -127,7 +130,7 @@ class BleScanActivity : AppCompatActivity() {
                     binding.textScan.text = getString(R.string.lancer_scan)
                     binding.progressBarScanBle.isIndeterminate = false
                     stopScan(scanCallBack)
-                }, 15000)
+                }, SCAN_DELAY.toLong())
                 scanning=true
                 startScan(scanCallBack)
             }else{
@@ -149,10 +152,17 @@ class BleScanActivity : AppCompatActivity() {
     private fun addToList(res:ScanResult){
         val index:Int = itemsList.indexOfFirst{ it.device.address==res.device.address }
         if(index == -1){
-            itemsList.add(res)
+            if(kotlin.math.abs(res.rssi)< MAX_RSSI) {
+                itemsList.add(res)
+            }
         }else{
-            itemsList[index]=res
+            if(kotlin.math.abs(res.rssi)> MAX_RSSI){
+                itemsList.remove(res)
+            }else {
+                itemsList[index] = res
+            }
         }
+
         itemsList.sortBy { kotlin.math.abs(it.rssi) }
         listBleAdapter.notifyDataSetChanged()
     }
@@ -168,6 +178,8 @@ class BleScanActivity : AppCompatActivity() {
                 binding.imgPlayBle.setImageResource(R.drawable.pause)
                 binding.textScan.text = getString(R.string.scan_loading)
                 binding.progressBarScanBle.isIndeterminate = true
+                listBleAdapter.clearResults()
+                listBleAdapter.notifyDataSetChanged()
             } else {
                 binding.imgPlayBle.setImageResource(R.drawable.play)
                 binding.textScan.text = getString(R.string.lancer_scan)
