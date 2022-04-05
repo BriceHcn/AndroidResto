@@ -95,7 +95,6 @@ class BleServiceAdapter (private val bleServices:List<BLEService>,
         holder.characteristicProperties.text = proprietiesMessage
 
         characteristic.value?.let {
-            Log.d("salut","salut")
             val hex = it.joinToString("-") { byte -> "%02x".format(byte)}.uppercase(Locale.FRANCE)
             val value = "Valeur : ${String(it)} Hex : 0x$hex"
             holder.characteristicValue.visibility = View.VISIBLE
