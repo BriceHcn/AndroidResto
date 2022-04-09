@@ -17,7 +17,6 @@ import java.util.*
 
 
 class BLEDeviceActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityBledeviceBinding
     private var bluetoothGatt: BluetoothGatt? = null
     private var timer: Timer? = null
